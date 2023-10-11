@@ -1,0 +1,29 @@
+﻿<Page
+    x:Class="FleetManagementSystem.Views.MainPages.ForkliftPages.LidarLocPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cefSharp="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:forkliftpagesviewmodels="clr-namespace:FleetManagementSystem.ViewModels.ForkliftPagesVIewModels"
+    xmlns:local="clr-namespace:FleetManagementSystem.Views.MainPages.ForkliftPages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="LidarLocPage"
+    d:DataContext="{d:DesignInstance Type=forkliftpagesviewmodels:LidarLocPageViewModel}"
+    d:DesignHeight="980"
+    d:DesignWidth="1000"
+    mc:Ignorable="d">
+
+    <Grid
+        Width="1240"
+        Height="765"
+        HorizontalAlignment="Left"
+        Background="Transparent">
+        <cefSharp:ChromiumWebBrowser
+            Name="LidarLock"
+            cefSharp:ClipToBounds="True"
+            cefSharp:HorizontalAlignment="Stretch"
+            cefSharp:VerticalAlignment="Stretch"
+            cefSharp:VerticalContentAlignment="Stretch"
+            Address="{Binding LidarLocAddress}" />
+    </Grid>
+</Page>

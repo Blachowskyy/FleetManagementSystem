@@ -1,0 +1,432 @@
+﻿<Page
+    x:Class="FleetManagementSystem.Views.InstallatorPages.CustomJobsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:conv="clr-namespace:FleetManagementSystem.ViewModels.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:installatorpagesviewmodels="clr-namespace:FleetManagementSystem.ViewModels.InstallatorPagesViewModels"
+    xmlns:local="clr-namespace:FleetManagementSystem.Views.InstallatorPages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="CustomJobsPage"
+    d:DataContext="{d:DesignInstance Type=installatorpagesviewmodels:CustomJobsPageViewModel}"
+    d:DesignHeight="900"
+    d:DesignWidth="1920"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <conv:BoolToVIsibilityConverter x:Key="BoolToVisibilityConverter" />
+        <conv:NegativeBoolConverter x:Key="NegativeBoolConverter" />
+        <conv:BoolToRedGreenConverter x:Key="BoolToColor" />
+        <conv:BoolToGreyGreenConverter x:Key="BoolToGreyGreen" />
+        <conv:BoolToRedGreyConverter x:Key="BoolToRedGrey" />
+        <conv:BoolToYellowGreenConverter x:Key="BoolToYellowGreen" />
+        <conv:TaskTypeFromIntToStringConverter x:Key="TaskConverter" />
+    </Page.Resources>
+    <Grid Margin="0,15,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="700" />
+                <ColumnDefinition Width="400" />
+                <ColumnDefinition Width="300" />
+
+
+            </Grid.ColumnDefinitions>
+            <TextBlock
+                Grid.Column="0"
+                Margin="0,5,0,15"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Background="Transparent"
+                FontSize="24"
+                FontWeight="Bold"
+                Foreground="White"
+                Text="Wybierz ID listy zadań:" />
+            <ComboBox
+                Grid.Column="1"
+                Width="350"
+                Height="35"
+                Margin="15,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                HorizontalContentAlignment="Left"
+                FontSize="18"
+                FontWeight="Bold"
+                ItemsSource="{Binding JobsReaded}"
+                SelectedItem="{Binding SelectedJob}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Id}" />
+                            <TextBlock Text=". " />
+                            <TextBlock Text="{Binding JobName}" />
+                            <TextBlock Text=" (Priorytet: " />
+                            <TextBlock Text="{Binding Priority}" />
+                            <TextBlock Text=")" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button
+                x:Name="DeleteLocationButton"
+                Grid.Column="2"
+                Height="40"
+                Margin="10,0,0,0"
+                Padding="0,0"
+                HorizontalContentAlignment="Left"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Command="{Binding Path=DeleteJobButtonClick}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Image
+                        Width="40"
+                        Height="40"
+                        Margin="0,0,5,0"
+                        Source="/Resources/Icons/WhiteDelete.png" />
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontSize="18"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        Text="Usuń bieżącą listę zadań" />
+                </Grid>
+            </Button>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="400" />
+                    <ColumnDefinition Width="1250" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock
+                        Grid.Column="2"
+                        Width="auto"
+                        Margin="0,10,0,15"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Background="Transparent"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        Text="Kroki wybranej listy zadań:" />
+                    <DockPanel Margin="0,0,0,0">
+                        <ScrollViewer
+                            Grid.RowSpan="1"
+                            Height="650"
+                            CanContentScroll="True"
+                            HorizontalScrollBarVisibility="Disabled"
+                            VerticalScrollBarVisibility="Auto">
+                            <ItemsControl Height="auto" ItemsSource="{Binding SelectedJobTasks}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button
+                                            Width="auto"
+                                            Height="70"
+                                            Background="Transparent"
+                                            BorderBrush="Transparent"
+                                            Command="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl}, Path=DataContext.GetSelectedJobStep}"
+                                            CommandParameter="{Binding Id}">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="auto" />
+                                                    <ColumnDefinition Width="auto" />
+                                                    <ColumnDefinition Width="auto" />
+                                                    <ColumnDefinition Width="auto" />
+                                                    <ColumnDefinition Width="auto" />
+                                                    <ColumnDefinition Width="auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock
+                                                    Grid.Column="0"
+                                                    Width="auto"
+                                                    Height="auto"
+                                                    Margin="5,0,0,0"
+                                                    FontSize="16"
+                                                    Foreground="White"
+                                                    Text="Lokalizacja:" />
+                                                <TextBlock
+                                                    Grid.Column="1"
+                                                    Width="auto"
+                                                    Height="auto"
+                                                    Margin="5,0,0,0"
+                                                    FontSize="16"
+                                                    Foreground="White"
+                                                    Text="{Binding TaskLocation.Name}" />
+                                                <TextBlock
+                                                    Grid.Column="2"
+                                                    Width="auto"
+                                                    Height="auto"
+                                                    Margin="5,0,0,0"
+                                                    FontSize="16"
+                                                    Foreground="White"
+                                                    Text="," />
+                                                <TextBlock
+                                                    Grid.Column="5"
+                                                    Width="auto"
+                                                    Height="auto"
+                                                    Margin="5,0,0,0"
+                                                    FontSize="16"
+                                                    Foreground="White"
+                                                    Text="{Binding TaskType, Converter={StaticResource TaskConverter}}" />
+                                            </Grid>
+                                        </Button>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </DockPanel>
+                </StackPanel>
+                <Grid Grid.Column="1">
+                    <Grid>
+                        <StackPanel>
+                            <StackPanel>
+                                <StackPanel
+                                    Width="auto"
+                                    Height="100"
+                                    Orientation="Horizontal">
+                                    <TextBlock
+                                        Margin="15,5,0,15"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        Background="Transparent"
+                                        FontSize="18"
+                                        FontWeight="Bold"
+                                        Foreground="White"
+                                        Text="Wybierz lokalizację zadania:" />
+                                    <ComboBox
+                                        Width="350"
+                                        Height="30"
+                                        Margin="15,0,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        HorizontalContentAlignment="Left"
+                                        FontSize="18"
+                                        FontWeight="Bold"
+                                        ItemsSource="{Binding AvaibleLocations}"
+                                        SelectedItem="{Binding SelectedLocation}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Id}" />
+                                                    <TextBlock Text=". " />
+                                                    <TextBlock Text="{Binding Name}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+
+                                </StackPanel>
+                                <StackPanel Height="100" Orientation="Horizontal">
+                                    <TextBlock
+                                        Margin="15,5,0,15"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        Background="Transparent"
+                                        FontSize="18"
+                                        FontWeight="Bold"
+                                        Foreground="White"
+                                        Text="Wybierz typ działania:" />
+                                    <ComboBox
+                                        Width="350"
+                                        Height="30"
+                                        Margin="65,0,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        HorizontalContentAlignment="Left"
+                                        FontSize="18"
+                                        FontWeight="Bold"
+                                        ItemsSource="{Binding AvaibleTaskTypes}"
+                                        SelectedItem="{Binding SelectedTaskType}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Id}" />
+                                                    <TextBlock Text=". " />
+                                                    <TextBlock Text="{Binding Description}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Height="130" Orientation="Horizontal">
+                                <Button
+                                    x:Name="AddJobStepButton"
+                                    Margin="300,0,0,0"
+                                    Padding="15,10"
+                                    HorizontalContentAlignment="Left"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding Path=AddJobStepButtonClick}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image
+                                            Width="40"
+                                            Height="40"
+                                            Margin="0,0,5,0"
+                                            Source="/Resources/Icons/WhiteAdd.png" />
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            FontSize="18"
+                                            FontWeight="Bold"
+                                            Foreground="White"
+                                            Text="Dodaj krok pracy" />
+                                    </Grid>
+                                </Button>
+                                <Button
+                                    x:Name="EditJobStepButton"
+                                    Margin="10,0,0,0"
+                                    Padding="15,10"
+                                    HorizontalContentAlignment="Left"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding Path=EditJobStepButtonClick}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image
+                                            Width="40"
+                                            Height="40"
+                                            Margin="0,0,5,0"
+                                            Source="/Resources/Icons/WhiteEdit.png" />
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            FontSize="18"
+                                            FontWeight="Bold"
+                                            Foreground="White"
+                                            Text="Edytuj krok pracy" />
+                                    </Grid>
+                                </Button>
+                                <Button
+                                    x:Name="DeleteJobStepButton"
+                                    Margin="10,0,0,0"
+                                    Padding="15,10"
+                                    HorizontalContentAlignment="Left"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding Path=DeleteJobStepButtonClick}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image
+                                            Width="40"
+                                            Height="40"
+                                            Margin="0,0,5,0"
+                                            Source="/Resources/Icons/WhiteDelete.png" />
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            FontSize="18"
+                                            FontWeight="Bold"
+                                            Foreground="White"
+                                            Text="Usuń krok pracy" />
+                                    </Grid>
+                                </Button>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock
+                                    Grid.Column="2"
+                                    Width="auto"
+                                    Margin="0,5,0,15"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Top"
+                                    Background="Transparent"
+                                    FontSize="20"
+                                    FontWeight="Bold"
+                                    Foreground="White"
+                                    Text="Parametry listy zadań:" />
+                                <StackPanel Height="100" Orientation="Horizontal">
+                                    <TextBlock
+                                        Margin="15,5,0,15"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        Background="Transparent"
+                                        FontSize="18"
+                                        FontWeight="Bold"
+                                        Foreground="White"
+                                        Text="Wybierz priorytet listy zadań:" />
+                                    <ComboBox
+                                        Width="200"
+                                        Height="30"
+                                        Margin="15,0,0,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        HorizontalContentAlignment="Left"
+                                        FontSize="18"
+                                        FontWeight="Bold"
+                                        ItemsSource="{Binding AvaiblePriorities}"
+                                        SelectedItem="{Binding SelectedPriority}" />
+
+                                </StackPanel>
+                                <StackPanel Height="100" Orientation="Horizontal">
+                                    <TextBlock
+                                        Margin="15,5,0,15"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        Background="Transparent"
+                                        FontSize="18"
+                                        FontWeight="Bold"
+                                        Foreground="White"
+                                        Text="Wprowadź nazwę listy zadań:" />
+                                    <TextBox
+                                        Width="500"
+                                        Height="30"
+                                        Margin="15,0,0,0"
+                                        FontSize="18"
+                                        Text="{Binding TemporaryName}" />
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Height="130" Orientation="Horizontal">
+                                <Button
+                                    x:Name="AddNewTaskList"
+                                    Margin="400,0,0,0"
+                                    Padding="15,10"
+                                    HorizontalContentAlignment="Left"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding Path=SaveJobButtonClick}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image
+                                            Width="40"
+                                            Height="40"
+                                            Margin="0,0,5,0"
+                                            Source="/Resources/Icons/WhiteAdd.png" />
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            FontSize="18"
+                                            FontWeight="Bold"
+                                            Foreground="White"
+                                            Text="Utwórz nową listę zadań" />
+                                    </Grid>
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+
+    </Grid>
+
+</Page>

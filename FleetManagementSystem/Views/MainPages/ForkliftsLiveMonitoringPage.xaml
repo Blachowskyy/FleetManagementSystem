@@ -1,0 +1,347 @@
+﻿<Page
+    x:Class="FleetManagementSystem.Views.MainPages.ForkliftsLiveMonitoringPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:conv="clr-namespace:FleetManagementSystem.ViewModels.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:FleetManagementSystem.Views.MainPages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="900"
+    d:DesignWidth="1920"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <conv:BoolToVIsibilityConverter x:Key="BoolToVisibilityConverter" />
+        <conv:NegativeBoolConverter x:Key="NegativeBoolConverter" />
+        <conv:BoolToRedGreenConverter x:Key="BoolToColor" />
+        <conv:BoolToGreyGreenConverter x:Key="BoolToGreyGreen" />
+        <conv:BoolToRedGreyConverter x:Key="BoolToRedGrey" />
+        <conv:BoolToYellowGreenConverter x:Key="BoolToYellowGreen" />
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--#region Lista dostępnych wózków-->
+        <StackPanel Orientation="Vertical">
+            <TextBlock
+                Margin="0"
+                Padding="15,10"
+                HorizontalAlignment="Stretch"
+                Background="Transparent"
+                FontSize="24"
+                FontWeight="Bold"
+                Style="{StaticResource TitleStyle}"
+                Text="Wózki dostępne online:"
+                TextAlignment="Left" />
+            <Separator
+                Height="0.4"
+                Margin="0,-5,0,0"
+                Background="{StaticResource UnactiveBackgroundBrush}" />
+            <ItemsControl
+                Grid.Column="0"
+                Height="1000"
+                ItemsSource="{Binding AvaibleForklifts}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button
+                            Width="200"
+                            Height="70"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Command="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl}, Path=DataContext.SelectForkliftFromList}"
+                            CommandParameter="{Binding Name}"
+                            Content="{Binding Name}"
+                            FontSize="24"
+                            Foreground="White" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+        <!--  Separator - pionowa linia  -->
+        <Border
+            Grid.Column="0"
+            Width="3"
+            Margin="0,50,0,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Stretch"
+            Background="White" />
+        <!--#endregion-->
+        <!--#endregion-->
+        <StackPanel
+            Grid.Column="1"
+            Width="1570"
+            Height="980"
+            Orientation="Vertical">
+            <!--#region Animacja menu stron-->
+            <StackPanel Orientation="Horizontal">
+                <ToggleButton
+                    x:Name="ShowForkliftPagesButton"
+                    Width="200"
+                    Height="50"
+                    Margin="0,0,0,0"
+                    HorizontalContentAlignment="Left"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    IsChecked="False">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="40" />
+                        </Grid.ColumnDefinitions>
+                        <Image
+                            Grid.Column="1"
+                            Width="40"
+                            Height="40"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Source="/Resources/Icons/WhiteMenuArrowDown.png" />
+                        <TextBlock
+                            Grid.Column="0"
+                            Margin="5,0,0,0"
+                            HorizontalAlignment="Left"
+                            Background="Transparent"
+                            FontSize="20"
+                            FontWeight="Bold"
+                            Style="{StaticResource TitleStyle}"
+                            Text="Wybierz opcję"
+                            TextAlignment="Left" />
+                    </Grid>
+                    <ToggleButton.Triggers>
+                        <EventTrigger RoutedEvent="ToggleButton.Checked">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MenuContainer" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.0" Value="{x:Static Visibility.Visible}" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="MenuContainer"
+                                        Storyboard.TargetProperty="Opacity"
+                                        From="0"
+                                        To="1"
+                                        Duration="0:0:0.3">
+                                        <DoubleAnimation.EasingFunction>
+                                            <SineEase EasingMode="EaseInOut" />
+                                        </DoubleAnimation.EasingFunction>
+                                    </DoubleAnimation>
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="MenuPanel"
+                                        Storyboard.TargetProperty="Width"
+                                        From="0"
+                                        To="1000"
+                                        Duration="0:0:0.8">
+                                        <DoubleAnimation.EasingFunction>
+                                            <SineEase EasingMode="EaseInOut" />
+                                        </DoubleAnimation.EasingFunction>
+                                    </DoubleAnimation>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MenuContainer" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.0" Value="{x:Static Visibility.Collapsed}" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="MenuContainer"
+                                        Storyboard.TargetProperty="Opacity"
+                                        From="1"
+                                        To="0"
+                                        Duration="0:0:3.3">
+                                        <DoubleAnimation.EasingFunction>
+                                            <SineEase EasingMode="EaseInOut" />
+                                        </DoubleAnimation.EasingFunction>
+                                    </DoubleAnimation>
+                                    <DoubleAnimation
+                                        Storyboard.TargetName="MenuPanel"
+                                        Storyboard.TargetProperty="Width"
+                                        From="1000"
+                                        To="0"
+                                        Duration="0:0:3.3">
+                                        <DoubleAnimation.EasingFunction>
+                                            <SineEase EasingMode="EaseInOut" />
+                                        </DoubleAnimation.EasingFunction>
+                                    </DoubleAnimation>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ToggleButton.Triggers>
+                </ToggleButton>
+                <!--#endregion-->
+                <!--#region Side menu region-->
+                <Border
+                    x:Name="MenuContainer"
+                    Width="1570"
+                    Height="50"
+                    Background="Transparent"
+                    CornerRadius="10"
+                    Opacity="0">
+                    <StackPanel
+                        x:Name="MenuPanel"
+                        Height="50"
+                        HorizontalAlignment="Left"
+                        Background="{StaticResource PrimaryBackgroundBrush}"
+                        Orientation="Horizontal">
+                        <Button
+                            Height="50"
+                            Padding="15,0"
+                            HorizontalContentAlignment="Left"
+                            VerticalContentAlignment="Center"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Command="{Binding Path=DriveDataPageButtonClick}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Image
+                                    Width="40"
+                                    Height="40"
+                                    Margin="0,0,5,0"
+                                    Source="/Resources/Icons/WhiteLiveMonitoring.png" />
+                                <TextBlock
+                                    Grid.Column="1"
+                                    VerticalAlignment="Top"
+                                    FontSize="18"
+                                    FontWeight="Bold"
+                                    Foreground="White"
+                                    Text="Parametry jazdy" />
+                            </Grid>
+                        </Button>
+                        <Separator
+                            Width="0.4"
+                            Margin="0,-5,0,0"
+                            Background="{StaticResource UnactiveBackgroundBrush}" />
+                        <Button
+                            Height="50"
+                            Padding="15,0"
+                            HorizontalContentAlignment="Left"
+                            VerticalContentAlignment="Center"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Command="{Binding Path=WorkstatesPageButtonClick}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Image
+                                    Width="40"
+                                    Height="40"
+                                    Margin="0,0,5,0"
+                                    Source="/Resources/Icons/WhiteWorkState.png" />
+                                <TextBlock
+                                    Grid.Column="1"
+                                    VerticalAlignment="Top"
+                                    FontSize="18"
+                                    FontWeight="Bold"
+                                    Foreground="White"
+                                    Text="Stany pracy" />
+                            </Grid>
+                        </Button>
+                        <Button
+                            Height="50"
+                            Padding="15,0"
+                            HorizontalContentAlignment="Left"
+                            VerticalContentAlignment="Center"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Command="{Binding Path=TaskPageButtonClick}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Image
+                                    Width="40"
+                                    Height="40"
+                                    Margin="0,0,5,0"
+                                    Source="/Resources/Icons/WhiteTaskList.png" />
+                                <TextBlock
+                                    Grid.Column="1"
+                                    VerticalAlignment="Top"
+                                    FontSize="18"
+                                    FontWeight="Bold"
+                                    Foreground="White"
+                                    Text="Lista zadań" />
+                            </Grid>
+                        </Button>
+                        <Button
+                            Height="50"
+                            Padding="15,0"
+                            HorizontalContentAlignment="Left"
+                            VerticalContentAlignment="Center"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Command="{Binding Path=LidarLocPageButtonClick}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Image
+                                    Width="40"
+                                    Height="40"
+                                    Margin="0,0,5,0"
+                                    Source="/Resources/Icons/WhiteMapLocalization.png" />
+                                <TextBlock
+                                    Grid.Column="1"
+                                    VerticalAlignment="Top"
+                                    FontSize="18"
+                                    FontWeight="Bold"
+                                    Foreground="White"
+                                    Text="SICK® LidarLock" />
+                            </Grid>
+                        </Button>
+                        <Button
+                            Height="50"
+                            Padding="15,0"
+                            HorizontalContentAlignment="Left"
+                            VerticalContentAlignment="Center"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Command="{Binding Path=CommandsPageButtonClick}"
+                            Visibility="{Binding IsInstallator, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Image
+                                    Width="40"
+                                    Height="40"
+                                    Margin="0,0,5,0"
+                                    Source="/Resources/Icons/WhiteCommandList.png" />
+                                <TextBlock
+                                    Grid.Column="1"
+                                    VerticalAlignment="Top"
+                                    FontSize="18"
+                                    FontWeight="Bold"
+                                    Foreground="White"
+                                    Text="Opcje / komendy" />
+                            </Grid>
+                        </Button>
+
+                    </StackPanel>
+
+                </Border>
+            </StackPanel>
+            <!--#endregion-->
+            <Border
+                Grid.Column="0"
+                Height="3"
+                Margin="0,0,0,0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top"
+                Background="White" />
+            <Frame
+                x:Name="PageContainer"
+                Content="{Binding CurrentPage}"
+                NavigationUIVisibility="Hidden" />
+        </StackPanel>
+
+    </Grid>
+</Page>

@@ -1,0 +1,1575 @@
+﻿<Page
+    x:Class="FleetManagementSystem.Views.MainPages.ForkliftPages.CommandsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:conv="clr-namespace:FleetManagementSystem.ViewModels.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:FleetManagementSystem.Views.MainPages.ForkliftPages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="CommandsPage"
+    d:DesignHeight="1000"
+    d:DesignWidth="900"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <conv:BoolToVIsibilityConverter x:Key="BoolToVisibility" />
+        <conv:TaskTypeFromIntToStringConverter x:Key="TaskTypeConverter" />
+        <conv:SelectedItemToVisibilityConverter x:Key="SelectedItemToVisibility" />
+    </Page.Resources>
+    <!--#region Main grid region-->
+    <Grid x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--#region Menu-->
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+            <Button
+                Height="60"
+                Margin="0,0,0,0"
+                Padding="15,10"
+                HorizontalContentAlignment="Left"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Command="{Binding Path=WorkCommandsButtonClick}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Image Margin="0,0,5,0" Source="/Resources/Icons/WhiteForkliftWork.png" />
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontSize="14"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        Text="Praca wózka" />
+                </Grid>
+            </Button>
+            <Button
+                Height="60"
+                Margin="0,0,0,0"
+                Padding="15,10"
+                HorizontalContentAlignment="Left"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Command="{Binding Path=ManualTaskSendingButtonClick}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Image Margin="0,0,5,0" Source="/Resources/Icons/WhiteManualTaskSending.png" />
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontSize="14"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        Text="Ręczne wysyłanie zadań" />
+                </Grid>
+            </Button>
+            <Button
+                Height="60"
+                Margin="0,0,0,0"
+                Padding="15,10"
+                HorizontalContentAlignment="Left"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Command="{Binding Path=NavRideConfigurationButtonClick}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Image Margin="0,0,5,0" Source="/Resources/Icons/WhiteTEBParameters.png" />
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontSize="14"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        Text="Parametry TEB Local Planner" />
+                </Grid>
+            </Button>
+            <Button
+                Height="60"
+                Margin="0,0,0,0"
+                Padding="15,10"
+                HorizontalContentAlignment="Left"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Command="{Binding Path=NavRideConfigurationButtonClick}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Image Margin="0,0,5,0" Source="/Resources/Icons/WhiteAdd.png" />
+                    <TextBlock
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        FontSize="14"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        Text="Parametry nawigacyjne" />
+                </Grid>
+            </Button>
+        </StackPanel>
+        <!--#endregion-->
+        <!--#region Work control grid-->
+        <Grid
+            x:Name="WorkControlGrid"
+            Grid.Row="1"
+            Visibility="{Binding WorkCommandsVisibility, Converter={StaticResource BoolToVisibility}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1200" />
+                <ColumnDefinition Width="40" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <StackPanel Width="auto">
+                    <TextBlock
+                        Height="auto"
+                        Margin="0,15,0,0"
+                        HorizontalAlignment="Center"
+                        FontSize="18"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        Text="Kontrola pracy wózka" />
+                    <Separator
+                        Height="15"
+                        Margin="0,5,0,0"
+                        Background="White"
+                        Foreground="White" />
+                    <DockPanel>
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <StackPanel Height="auto">
+                                <Button
+                                    x:Name="InitializeAutoModeButton"
+                                    Margin="0,0,0,0"
+                                    Padding="15,10"
+                                    HorizontalContentAlignment="Left"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding Path=InitializeAutoModeButtonClick}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image
+                                            Width="40"
+                                            Height="40"
+                                            Margin="0,0,5,0"
+                                            Source="/Resources/Icons/WhiteAutomaticWork.png" />
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            FontSize="18"
+                                            FontWeight="Bold"
+                                            Foreground="White"
+                                            Text="Inicjalizacja trybu automatycznego" />
+                                    </Grid>
+                                </Button>
+                                <Button
+                                    x:Name="ReinitializeAutoModeButton"
+                                    Margin="0,0,0,0"
+                                    Padding="15,10"
+                                    HorizontalContentAlignment="Left"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding Path=ReinitializeAutoModeButtonClick}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image
+                                            Width="40"
+                                            Height="40"
+                                            Margin="0,0,5,0"
+                                            Source="/Resources/Icons/WhiteAutomaticWork.png" />
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            FontSize="18"
+                                            FontWeight="Bold"
+                                            Foreground="White"
+                                            Text="Reinicjalizacja trybu automatycznego po błędzie" />
+                                    </Grid>
+                                </Button>
+                                <ToggleButton
+                                    x:Name="InitializeAutoMode"
+                                    Margin="0,0,0,0"
+                                    Padding="15,10"
+                                    HorizontalContentAlignment="Left"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding Path=SwitchManualModeButtonClick}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image
+                                            Width="40"
+                                            Height="40"
+                                            Margin="0,0,5,0"
+                                            Source="/Resources/Icons/WhiteMAnualMode.png" />
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            FontSize="18"
+                                            FontWeight="Bold"
+                                            Foreground="White"
+                                            Text="Inicjalizacja trybu pracy ręcznej" />
+                                    </Grid>
+                                </ToggleButton>
+                                <Button
+                                    Margin="0,0,0,0"
+                                    Padding="15,10"
+                                    HorizontalContentAlignment="Left"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding Path=PauseWorkButtonClick}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image
+                                            Width="40"
+                                            Height="40"
+                                            Margin="0,0,5,0"
+                                            Source="/Resources/Icons/WhitePAuse.png" />
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            FontSize="18"
+                                            FontWeight="Bold"
+                                            Foreground="White"
+                                            Text="Wstrzymaj pracę wózka" />
+                                    </Grid>
+                                </Button>
+                                <Button
+                                    Margin="0,0,0,0"
+                                    Padding="15,10"
+                                    HorizontalContentAlignment="Left"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding Path=ContinueWorkButtonClick}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image
+                                            Width="40"
+                                            Height="40"
+                                            Margin="0,0,5,0"
+                                            Source="/Resources/Icons/WhitePlay.png" />
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            FontSize="18"
+                                            FontWeight="Bold"
+                                            Foreground="White"
+                                            Text="Kontynuuj pracę wózka" />
+                                    </Grid>
+                                </Button>
+                                <Button
+                                    Margin="0,0,0,0"
+                                    Padding="15,10"
+                                    HorizontalContentAlignment="Left"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding Path=EmergencyStopButtonClick}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image
+                                            Width="40"
+                                            Height="40"
+                                            Margin="0,0,5,0"
+                                            Source="/Resources/Icons/WhiteStop.png" />
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            FontSize="18"
+                                            FontWeight="Bold"
+                                            Foreground="White"
+                                            Text="Awaryjne zatrzymanie wózka" />
+                                    </Grid>
+                                </Button>
+                                <TextBlock
+                                    Height="auto"
+                                    Margin="0,15,0,0"
+                                    HorizontalAlignment="Center"
+                                    FontSize="18"
+                                    FontWeight="Bold"
+                                    Foreground="White"
+                                    Text="Ustawienia pracy" />
+                                <Separator
+                                    Height="15"
+                                    Margin="0,5,0,0"
+                                    Background="White"
+                                    Foreground="White" />
+                                <StackPanel Margin="15,20,0,0" Orientation="Horizontal">
+                                    <TextBlock
+                                        FontSize="18"
+                                        FontWeight="Bold"
+                                        Foreground="White"
+                                        Text="Przyjmuj polecenia z WMS" />
+                                    <CheckBox
+                                        Width="80"
+                                        Height="35"
+                                        Margin="50,-5,0,0"
+                                        IsChecked="{Binding VisibleManualTaskOrdering, Mode=TwoWay}"
+                                        Style="{DynamicResource SliderStyle}" />
+                                </StackPanel>
+
+                            </StackPanel>
+                        </ScrollViewer>
+                    </DockPanel>
+                </StackPanel>
+            </StackPanel>
+
+        </Grid>
+        <!--#endregion-->
+        <!--#region  Navigation settings-->
+        <Grid
+            Grid.Row="1"
+            Margin="15,15,0,0"
+            Visibility="{Binding NavRideParametersVisibility, Converter={StaticResource BoolToVisibility}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1000" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <DockPanel Grid.Column="0">
+                <ScrollViewer
+                    Height="600"
+                    HorizontalScrollBarVisibility="Disabled"
+                    VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <!--#region Ride settings-->
+                        <TextBlock
+                            Margin="0,0,0,0"
+                            HorizontalAlignment="Center"
+                            FontSize="26"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="Parametry jazdy" />
+                        <Separator
+                            Height="10"
+                            Margin="0,-5,0,0"
+                            Background="White" />
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Width="auto">
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="Maksymalna prędkość do przodu:" />
+                                <Separator
+                                    Height="10"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="Maksymalna prędkość do tyłu:" />
+                                <Separator
+                                    Height="10"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="Maksymalna prędkość kątowa:" />
+                                <Separator
+                                    Height="10"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="Maksymalne przyspieszenie:" />
+                                <Separator
+                                    Height="10"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="Maksymalne przyspieszenie kątowe:" />
+                                <Separator
+                                    Height="15"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="Pozwól na start jazdy ruchem do tyłu:" />
+                                <Separator
+                                    Height="15"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="Zezwolenie na ruch oscylacyjny w przypadku utknięcia:" />
+                                <Separator
+                                    Height="10"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                            </StackPanel>
+                            <StackPanel Width="auto" Margin="80,0,0,0">
+                                <TextBox
+                                    Width="350"
+                                    HorizontalAlignment="Right"
+                                    FontSize="18"
+                                    Foreground="Black"
+                                    Text="{Binding MaxForwardSpeed}" />
+                                <Separator
+                                    Height="7"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBox
+                                    Width="350"
+                                    HorizontalAlignment="Right"
+                                    FontSize="18"
+                                    Foreground="Black"
+                                    Text="{Binding MaxBackwardSpeed}" />
+                                <Separator
+                                    Height="7"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBox
+                                    Width="350"
+                                    HorizontalAlignment="Right"
+                                    FontSize="18"
+                                    Foreground="Black"
+                                    Text="{Binding MaxTurningSpeed}" />
+                                <Separator
+                                    Height="7"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBox
+                                    Width="350"
+                                    HorizontalAlignment="Right"
+                                    FontSize="18"
+                                    Foreground="Black"
+                                    Text="{Binding MaxAcceleration}" />
+                                <Separator
+                                    Height="7"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBox
+                                    Width="350"
+                                    HorizontalAlignment="Right"
+                                    FontSize="18"
+                                    Foreground="Black"
+                                    Text="{Binding MaxTurningAcceleration}" />
+                                <Separator
+                                    Height="7"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <CheckBox
+                                    Width="80"
+                                    Height="35"
+                                    Margin="0,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    IsChecked="{Binding AllowOscillationRecovery, Mode=TwoWay}"
+                                    Style="{DynamicResource SliderStyle}" />
+                                <Separator
+                                    Height="7"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <CheckBox
+                                    Width="80"
+                                    Height="35"
+                                    Margin="0,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    IsChecked="{Binding AllowInitializeWithBackwardMotion, Mode=TwoWay}"
+                                    Style="{DynamicResource SliderStyle}" />
+                            </StackPanel>
+                            <StackPanel
+                                Width="auto"
+                                Margin="10,0,0,0"
+                                HorizontalAlignment="Left">
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="m/s" />
+                                <Separator
+                                    Height="10"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="m/s" />
+                                <Separator
+                                    Height="10"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="radiany/s" />
+                                <Separator
+                                    Height="10"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="m/s²" />
+                                <Separator
+                                    Height="10"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="radiany/s²" />
+                                <Separator
+                                    Height="15"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+
+                            </StackPanel>
+                        </StackPanel>
+                        <!--#endregion-->
+                        <!--#region  Phisical setting-->
+                        <TextBlock
+                            Margin="0,0,0,0"
+                            HorizontalAlignment="Center"
+                            FontSize="26"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="Parametry fizyczne wózka" />
+                        <Separator
+                            Height="10"
+                            Margin="0,-5,0,0"
+                            Background="White" />
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Width="auto">
+
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="Promień zawracania:" />
+                                <Separator
+                                    Height="10"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="Rozstaw osi:" />
+                                <Separator
+                                    Height="10"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                            </StackPanel>
+                            <StackPanel Width="auto" Margin="350,0,0,0">
+                                <TextBox
+                                    Width="350"
+                                    HorizontalAlignment="Right"
+                                    FontSize="18"
+                                    Foreground="Black"
+                                    Text="{Binding TurningRadius}" />
+                                <Separator
+                                    Height="7"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBox
+                                    Width="350"
+                                    HorizontalAlignment="Right"
+                                    FontSize="18"
+                                    Foreground="Black"
+                                    Text="{Binding WheelBase}" />
+                                <Separator
+                                    Height="7"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+
+                            </StackPanel>
+                            <StackPanel
+                                Width="auto"
+                                Margin="10,0,0,0"
+                                HorizontalAlignment="Left">
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="m" />
+                                <Separator
+                                    Height="10"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="m" />
+                                <Separator
+                                    Height="10"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                            </StackPanel>
+                        </StackPanel>
+                        <!--#endregion-->
+                        <!--#region Target settings-->
+                        <TextBlock
+                            Margin="0,0,0,0"
+                            HorizontalAlignment="Center"
+                            FontSize="26"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="Ustawienia tolerancji celu" />
+                        <Separator
+                            Height="10"
+                            Margin="0,-5,0,0"
+                            Background="White" />
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Width="auto">
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="Tolerancja celu w osi X i Y:" />
+                                <Separator
+                                    Height="10"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="Tolerancja kątowa celu:" />
+                                <Separator
+                                    Height="10"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                            </StackPanel>
+                            <StackPanel Width="auto" Margin="305,0,0,0">
+                                <TextBox
+                                    Width="350"
+                                    HorizontalAlignment="Right"
+                                    FontSize="18"
+                                    Foreground="Black"
+                                    Text="{Binding GoalToleranceXY}" />
+                                <Separator
+                                    Height="7"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBox
+                                    Width="350"
+                                    HorizontalAlignment="Right"
+                                    FontSize="18"
+                                    Foreground="Black"
+                                    Text="{Binding GoalToleranceYaw}" />
+                                <Separator
+                                    Height="7"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+
+                            </StackPanel>
+                            <StackPanel
+                                Width="auto"
+                                Margin="10,0,0,0"
+                                HorizontalAlignment="Left">
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="m" />
+                                <Separator
+                                    Height="10"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="radiany" />
+                                <Separator
+                                    Height="10"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                            </StackPanel>
+                        </StackPanel>
+                        <!--#endregion-->
+                        <!--#region Obstacles settings-->
+                        <TextBlock
+                            Margin="0,0,0,0"
+                            HorizontalAlignment="Center"
+                            FontSize="26"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="Ustawienia wykrywania przeszkód" />
+                        <Separator
+                            Height="10"
+                            Margin="0,-5,0,0"
+                            Background="White" />
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Width="auto">
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="Minimalna odległość od przeszkody:" />
+                                <Separator
+                                    Height="10"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="Promień wypełnienia wykrytego obiektu stacjonarnego:" />
+                                <Separator
+                                    Height="10"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="Promień wypełnienia wykrytego obiektu dynamicznego:" />
+                                <Separator
+                                    Height="15"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="Uwzględniaj przeszkody dynamiczne:" />
+                                <Separator
+                                    Height="15"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="Uwzględniaj przeszkody mapy kosztów:" />
+                                <Separator
+                                    Height="10"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                            </StackPanel>
+                            <StackPanel Width="auto" Margin="65,0,0,0">
+                                <TextBox
+                                    Width="350"
+                                    HorizontalAlignment="Right"
+                                    FontSize="18"
+                                    Foreground="Black"
+                                    Text="{Binding MinimalObstacleDistance}" />
+                                <Separator
+                                    Height="7"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBox
+                                    Width="350"
+                                    HorizontalAlignment="Right"
+                                    FontSize="18"
+                                    Foreground="Black"
+                                    Text="{Binding ObstacleIflationRadius}" />
+                                <Separator
+                                    Height="7"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBox
+                                    Width="350"
+                                    HorizontalAlignment="Right"
+                                    FontSize="18"
+                                    Foreground="Black"
+                                    Text="{Binding DynamicObstacleInflationRadius}" />
+                                <Separator
+                                    Height="7"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <CheckBox
+                                    Width="80"
+                                    Height="35"
+                                    Margin="0,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    IsChecked="{Binding IncludeDynamicObstacles, Mode=TwoWay}"
+                                    Style="{DynamicResource SliderStyle}" />
+                                <CheckBox
+                                    Width="80"
+                                    Height="35"
+                                    Margin="0,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    IsChecked="{Binding IncludeCostmapObstacles, Mode=TwoWay}"
+                                    Style="{DynamicResource SliderStyle}" />
+                            </StackPanel>
+                            <StackPanel
+                                Width="auto"
+                                Margin="10,0,0,0"
+                                HorizontalAlignment="Left">
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="m" />
+                                <Separator
+                                    Height="10"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="m" />
+                                <Separator
+                                    Height="10"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="m" />
+                                <Separator
+                                    Height="10"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                            </StackPanel>
+                        </StackPanel>
+                        <!--#endregion-->
+                        <!--#region Other parameters-->
+                        <TextBlock
+                            Margin="0,0,0,0"
+                            HorizontalAlignment="Center"
+                            FontSize="26"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="Inne" />
+                        <Separator
+                            Height="10"
+                            Margin="0,-5,0,0"
+                            Background="White" />
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Width="auto">
+                                <TextBlock
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="Rozdzielczośc trajektorii ( dt_ref ):" />
+                                <Separator
+                                    Height="10"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBlock
+                                    Width="450"
+                                    FontSize="18"
+                                    Foreground="White"
+                                    Text="Histereza automatycznej zmiany rozmiaru w zależności od rozdzielczości ( Zalecane 10% dt_ref ):"
+                                    TextWrapping="Wrap" />
+                                <Separator
+                                    Height="10"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+
+                            </StackPanel>
+                            <StackPanel Width="auto" Margin="65,0,0,0">
+                                <TextBox
+                                    Width="350"
+                                    HorizontalAlignment="Right"
+                                    FontSize="18"
+                                    Foreground="Black"
+                                    Text="{Binding DTRef}" />
+                                <Separator
+                                    Height="27"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                                <TextBox
+                                    Width="350"
+                                    HorizontalAlignment="Right"
+                                    FontSize="18"
+                                    Foreground="Black"
+                                    Text="{Binding DTHysteresis}" />
+                                <Separator
+                                    Height="7"
+                                    Margin="0,-5,0,0"
+                                    Background="{StaticResource UnactiveBackgroundBrush}" />
+
+                            </StackPanel>
+
+                        </StackPanel>
+                        <!--#endregion-->
+                    </StackPanel>
+                </ScrollViewer>
+            </DockPanel>
+            <StackPanel Grid.Column="1" VerticalAlignment="Bottom">
+                <Button
+                    Grid.Column="1"
+                    Margin="0,0,0,0"
+                    Padding="0,10"
+                    VerticalAlignment="Bottom"
+                    HorizontalContentAlignment="Left"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Command="{Binding Path=LoadConfigSavedOnForkliftButtonClick}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Image
+                            Width="60"
+                            Height="60"
+                            Margin="0,0,5,0"
+                            Source="/Resources/Icons/WhiteForkliftDownload.png" />
+                        <TextBlock
+                            Grid.Column="1"
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="Wczytaj z wózka" />
+                    </Grid>
+                </Button>
+                <Button
+                    Grid.Column="1"
+                    Margin="0,0,0,0"
+                    Padding="0,10"
+                    VerticalAlignment="Bottom"
+                    HorizontalContentAlignment="Left"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Command="{Binding Path=LoadConfigFromDatabaseButtonClick}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Image
+                            Width="60"
+                            Height="60"
+                            Margin="0,0,5,0"
+                            Source="/Resources/Icons/WhiteDatatbaseLoad.png" />
+                        <TextBlock
+                            Grid.Column="1"
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="Wczytaj backup" />
+                    </Grid>
+                </Button>
+                <Button
+                    Grid.Column="1"
+                    Margin="0,0,0,0"
+                    Padding="0,10"
+                    VerticalAlignment="Bottom"
+                    HorizontalContentAlignment="Left"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Command="{Binding Path=SendAndSaveConfigButtonClick}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Image
+                            Width="60"
+                            Height="60"
+                            Margin="0,0,5,0"
+                            Source="/Resources/Icons/WhiteForkliftUpload.png" />
+                        <TextBlock
+                            Grid.Column="1"
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="Wyślij ustawienia" />
+                    </Grid>
+                </Button>
+                <Button
+                    Grid.Column="1"
+                    Margin="0,0,0,0"
+                    Padding="0,10"
+                    VerticalAlignment="Bottom"
+                    HorizontalContentAlignment="Left"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Command="{Binding Path=SaveBackupParamsToDatabaseButtonClick}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Image
+                            Width="60"
+                            Height="60"
+                            Margin="0,0,5,0"
+                            Source="/Resources/Icons/WhiteDatatbaseSave.png" />
+                        <TextBlock
+                            Grid.Column="1"
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="Zapisz backup" />
+                    </Grid>
+                </Button>
+
+            </StackPanel>
+        </Grid>
+        <!--#endregion-->
+        <!--#region Manual task sending-->
+        <Grid
+            Grid.Row="1"
+            Margin="15,15,0,0"
+            Visibility="{Binding ManualTaskVisibility, Converter={StaticResource BoolToVisibility}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="550" />
+
+            </Grid.ColumnDefinitions>
+            <!--#region Lista dostępnych zadań-->
+            <TextBlock
+                Grid.Column="0"
+                Margin="0,0,0,0"
+                Padding="0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Background="Transparent"
+                FontSize="24"
+                FontWeight="Bold"
+                Style="{StaticResource TitleStyle}"
+                Text="Wybierz listę zadań"
+                TextAlignment="Center" />
+            <Separator
+                Height="0.4"
+                Margin="0,-5,0,0"
+                Background="{StaticResource UnactiveBackgroundBrush}" />
+            <DockPanel Grid.Column="0" Margin="0,40,0,0">
+                <ScrollViewer
+                    Height="650"
+                    CanContentScroll="True"
+                    HorizontalScrollBarVisibility="Disabled"
+                    VerticalScrollBarVisibility="Auto">
+                    <ItemsControl Height="auto" ItemsSource="{Binding AvaibleJobs}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button
+                                    Width="auto"
+                                    Height="50"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl}, Path=DataContext.GetSelectedJob}"
+                                    CommandParameter="{Binding Id}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock
+                                            Grid.Column="0"
+                                            Width="auto"
+                                            Height="auto"
+                                            Margin="5,0,0,0"
+                                            FontSize="16"
+                                            Foreground="White"
+                                            Text="{Binding Id}" />
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            Width="auto"
+                                            Height="auto"
+                                            Margin="0,0,0,0"
+                                            FontSize="16"
+                                            Foreground="White"
+                                            Text="." />
+                                        <TextBlock
+                                            Grid.Column="2"
+                                            Width="auto"
+                                            Height="auto"
+                                            Margin="5,0,0,0"
+                                            FontSize="16"
+                                            Foreground="White"
+                                            Text="{Binding JobName}" />
+                                        <TextBlock
+                                            Grid.Column="3"
+                                            Width="auto"
+                                            Height="auto"
+                                            Margin="5,0,0,0"
+                                            FontSize="16"
+                                            Foreground="White"
+                                            Text="(Priorytet" />
+                                        <TextBlock
+                                            Grid.Column="4"
+                                            Width="auto"
+                                            Height="auto"
+                                            Margin="5,0,0,0"
+                                            FontSize="16"
+                                            Foreground="White"
+                                            Text="{Binding Priority}" />
+                                        <TextBlock
+                                            Grid.Column="5"
+                                            Width="auto"
+                                            Height="auto"
+                                            Margin="0,0,0,0"
+                                            FontSize="16"
+                                            Foreground="White"
+                                            Text=")" />
+                                    </Grid>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </DockPanel>
+            <!--#endregion-->
+            <!--#region Oddzielenie kolumn-->
+            <Border
+                Grid.Column="1"
+                Width="3"
+                Margin="15,0,0,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Stretch"
+                Background="White" />
+            <Border
+                Grid.Column="3"
+                Width="3"
+                Margin="15,0,0,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Stretch"
+                Background="White" />
+            <!--#endregion-->
+            <!--#region Lista dostępnych kroków zadania-->
+            <TextBlock
+                Grid.Column="2"
+                Margin="10,0,0,0"
+                Padding="0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Background="Transparent"
+                FontSize="24"
+                FontWeight="Bold"
+                Style="{StaticResource TitleStyle}"
+                Text="Wybierz zadanie do przesłania"
+                TextAlignment="Center" />
+            <Separator
+                Height="0.4"
+                Margin="0,-5,0,0"
+                Background="{StaticResource UnactiveBackgroundBrush}" />
+            <DockPanel Grid.Column="2" Margin="0,40,0,0">
+
+                <ScrollViewer
+                    Height="650"
+                    CanContentScroll="True"
+                    HorizontalScrollBarVisibility="Disabled"
+                    VerticalScrollBarVisibility="Auto">
+                    <ItemsControl Height="auto" ItemsSource="{Binding CurrentJobSteps}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button
+                                    Width="auto"
+                                    Height="auto"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding RelativeSource={RelativeSource AncestorType=ItemsControl}, Path=DataContext.GetSelectedStep}"
+                                    CommandParameter="{Binding Id}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock
+                                            Grid.Column="0"
+                                            Width="auto"
+                                            Height="auto"
+                                            Margin="5,0,0,0"
+                                            FontSize="16"
+                                            Foreground="White"
+                                            Text="{Binding Id}" />
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            Width="auto"
+                                            Height="auto"
+                                            Margin="0,0,0,0"
+                                            FontSize="16"
+                                            Foreground="White"
+                                            Text=". Lokalizacja:" />
+
+                                        <TextBlock
+                                            Grid.Column="2"
+                                            Width="auto"
+                                            Height="auto"
+                                            Margin="5,0,0,0"
+                                            FontSize="16"
+                                            Foreground="White"
+                                            Text="{Binding TaskLocation.Name}"
+                                            TextWrapping="Wrap" />
+                                        <TextBlock
+                                            Grid.Column="3"
+                                            Width="auto"
+                                            Height="auto"
+                                            Margin="5,0,0,0"
+                                            FontSize="16"
+                                            Foreground="White"
+                                            Text="Typ zadania:" />
+                                        <TextBlock
+                                            Grid.Column="4"
+                                            Width="auto"
+                                            Height="auto"
+                                            Margin="5,0,0,0"
+                                            FontSize="16"
+                                            Foreground="White"
+                                            Text="{Binding TaskType, Converter={StaticResource TaskTypeConverter}}" />
+                                    </Grid>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </DockPanel>
+            <!--#endregion-->
+            <!--#region Wybrane elementy do wysłania-->
+            <StackPanel Grid.Column="4">
+                <TextBlock
+                    Grid.Column="2"
+                    Margin="10,0,0,0"
+                    Padding="0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Background="Transparent"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Style="{StaticResource TitleStyle}"
+                    Text="Wybrano do wysłania:"
+                    TextAlignment="Center" />
+                <Separator
+                    Height="0.4"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <!--#region Wybrana lista zadań-->
+                <StackPanel Margin="0,15,0,0" Orientation="Horizontal">
+                    <StackPanel>
+                        <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                            <TextBlock
+                                Width="auto"
+                                Height="auto"
+                                Margin="5,0,0,0"
+                                FontSize="16"
+                                Foreground="White"
+                                Text="{Binding SelectedJob.Id}" />
+                            <TextBlock
+                                Grid.Column="3"
+                                Width="auto"
+                                Height="auto"
+                                Margin="0,0,0,0"
+                                FontSize="16"
+                                Foreground="White"
+                                Text=". "
+                                Visibility="{Binding SelectedJob.Id, Converter={StaticResource SelectedItemToVisibility}}" />
+                            <TextBlock
+                                Width="auto"
+                                Height="auto"
+                                Margin="0,0,0,0"
+                                FontSize="16"
+                                Foreground="White"
+                                Text="{Binding SelectedJob.JobName}" />
+                            <TextBlock
+                                Grid.Column="3"
+                                Width="auto"
+                                Height="auto"
+                                Margin="5,0,0,0"
+                                FontSize="16"
+                                Foreground="White"
+                                Text="(Priorytet-"
+                                Visibility="{Binding SelectedJob.Id, Converter={StaticResource SelectedItemToVisibility}}" />
+                            <TextBlock
+                                Width="auto"
+                                Height="auto"
+                                Margin="0,0,0,0"
+                                FontSize="16"
+                                Foreground="White"
+                                Text="{Binding SelectedJob.Priority}" />
+                            <TextBlock
+                                Grid.Column="3"
+                                Width="auto"
+                                Height="auto"
+                                Margin="0,0,0,0"
+                                FontSize="16"
+                                Foreground="White"
+                                Text=") :"
+                                Visibility="{Binding SelectedJob.Id, Converter={StaticResource SelectedItemToVisibility}}" />
+                            <TextBlock
+                                Width="auto"
+                                Height="auto"
+                                Margin="5,0,0,0"
+                                FontSize="16"
+                                Foreground="White"
+                                Text="{Binding SelectedStep.TaskLocation.Name}"
+                                TextWrapping="Wrap" />
+                            <TextBlock
+                                Grid.Column="3"
+                                Width="auto"
+                                Height="auto"
+                                Margin="0,0,0,0"
+                                FontSize="16"
+                                Foreground="White"
+                                Text=" -"
+                                Visibility="{Binding SelectedStep.Id, Converter={StaticResource SelectedItemToVisibility}}" />
+                            <TextBlock
+                                Width="auto"
+                                Height="auto"
+                                Margin="5,0,0,0"
+                                FontSize="16"
+                                Foreground="White"
+                                Text="{Binding SelectedStep.TaskType, Converter={StaticResource TaskTypeConverter}}" />
+                        </StackPanel>
+                        <StackPanel Margin="22,5,0,0" Orientation="Horizontal">
+                            <TextBlock
+                                Grid.Column="3"
+                                Width="auto"
+                                Height="auto"
+                                Margin="0,0,0,0"
+                                FontSize="16"
+                                Foreground="White"
+                                Text="Pozycja w osi X:"
+                                Visibility="{Binding SelectedStep.Id, Converter={StaticResource SelectedItemToVisibility}}" />
+                            <TextBlock
+                                Width="auto"
+                                Height="auto"
+                                Margin="5,0,0,0"
+                                FontSize="16"
+                                Foreground="White"
+                                Text="{Binding SelectedStep.TaskLocation.PositionX}" />
+                            <TextBlock
+                                Grid.Column="3"
+                                Width="auto"
+                                Height="auto"
+                                Margin="0,0,0,0"
+                                FontSize="16"
+                                Foreground="White"
+                                Text="m, Pozycja w osi Y: "
+                                Visibility="{Binding SelectedStep.Id, Converter={StaticResource SelectedItemToVisibility}}" />
+                            <TextBlock
+                                Width="auto"
+                                Height="auto"
+                                Margin="0,0,0,0"
+                                FontSize="16"
+                                Foreground="White"
+                                Text="{Binding SelectedStep.TaskLocation.PositionY}" />
+                            <TextBlock
+                                Grid.Column="3"
+                                Width="auto"
+                                Height="auto"
+                                Margin="0,0,0,0"
+                                FontSize="16"
+                                Foreground="White"
+                                Text="m, Pozycja kątowa: "
+                                Visibility="{Binding SelectedStep.Id, Converter={StaticResource SelectedItemToVisibility}}" />
+                            <TextBlock
+                                Width="auto"
+                                Height="auto"
+                                Margin="0,0,0,0"
+                                FontSize="16"
+                                Foreground="White"
+                                Text="{Binding SelectedStep.TaskLocation.PositionR}" />
+                            <TextBlock
+                                Grid.Column="3"
+                                Width="auto"
+                                Height="auto"
+                                Margin="0,0,0,0"
+                                FontSize="16"
+                                Foreground="White"
+                                Text="°"
+                                Visibility="{Binding SelectedStep.Id, Converter={StaticResource SelectedItemToVisibility}}" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+                <!--#endregion-->
+                <!--#region Wybrany wózek-->
+                <TextBlock
+                    Grid.Column="2"
+                    Margin="10,25,0,0"
+                    Padding="0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Background="Transparent"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Style="{StaticResource TitleStyle}"
+                    Text="Wybrano wózek:"
+                    TextAlignment="Center" />
+                <Separator
+                    Height="0.4"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <StackPanel Margin="10,10,0,0" Orientation="Horizontal">
+                    <TextBlock
+                        Grid.Column="3"
+                        Width="auto"
+                        Height="auto"
+                        Margin="5,0,0,0"
+                        FontSize="16"
+                        Foreground="White"
+                        Text="Numer ID:" />
+                    <TextBlock
+                        Width="auto"
+                        Height="auto"
+                        Margin="5,0,0,0"
+                        FontSize="16"
+                        Foreground="White"
+                        Text="{Binding CurrentForklift.Id}" />
+                    <TextBlock
+                        Grid.Column="3"
+                        Width="auto"
+                        Height="auto"
+                        Margin="0,0,0,0"
+                        FontSize="16"
+                        Foreground="White"
+                        Text=", Nazwa wózka: " />
+                    <TextBlock
+                        Width="auto"
+                        Height="auto"
+                        Margin="5,0,0,0"
+                        FontSize="16"
+                        Foreground="White"
+                        Text="{Binding CurrentForklift.Name}" />
+                </StackPanel>
+                <StackPanel Margin="10,10,0,0" Orientation="Horizontal">
+                    <TextBlock
+                        Grid.Column="3"
+                        Width="auto"
+                        Height="auto"
+                        Margin="5,0,0,0"
+                        FontSize="16"
+                        Foreground="White"
+                        Text="Adres IP wózka:" />
+                    <TextBlock
+                        Width="auto"
+                        Height="auto"
+                        Margin="5,0,0,0"
+                        FontSize="16"
+                        Foreground="White"
+                        Text="{Binding CurrentForklift.IpAddress}" />
+                </StackPanel>
+                <StackPanel Margin="10,10,0,0" Orientation="Horizontal">
+                    <TextBlock
+                        Width="auto"
+                        Height="auto"
+                        Margin="5,0,0,0"
+                        FontSize="16"
+                        Foreground="White"
+                        Text="Obecna lokalizacja wózka w osi X mapy:" />
+                    <TextBlock
+                        Width="auto"
+                        Height="auto"
+                        Margin="5,0,0,0"
+                        FontSize="16"
+                        Foreground="White"
+                        Text="{Binding CurrentForklift.ForkliftData.CurrentPositionX}" />
+                </StackPanel>
+                <StackPanel Margin="10,10,0,0" Orientation="Horizontal">
+                    <TextBlock
+                        Width="auto"
+                        Height="auto"
+                        Margin="5,0,0,0"
+                        FontSize="16"
+                        Foreground="White"
+                        Text="Obecna lokalizacja wózka w osi Y mapy:" />
+                    <TextBlock
+                        Width="auto"
+                        Height="auto"
+                        Margin="5,0,0,0"
+                        FontSize="16"
+                        Foreground="White"
+                        Text="{Binding CurrentForklift.ForkliftData.CurrentPositionY}" />
+                </StackPanel>
+                <StackPanel Margin="10,10,0,0" Orientation="Horizontal">
+                    <TextBlock
+                        Width="auto"
+                        Height="auto"
+                        Margin="5,0,0,0"
+                        FontSize="16"
+                        Foreground="White"
+                        Text="Obecna lokalizacja kątowa wózka:" />
+                    <TextBlock
+                        Width="auto"
+                        Height="auto"
+                        Margin="5,0,0,0"
+                        FontSize="16"
+                        Foreground="White"
+                        Text="{Binding CurrentForklift.ForkliftData.CurrentPositionR}" />
+                </StackPanel>
+                <Button
+                    Grid.Column="1"
+                    Width="auto"
+                    Margin="0,10,0,0"
+                    Padding="0,10"
+                    VerticalAlignment="Bottom"
+                    HorizontalContentAlignment="Center"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Command="{Binding Path=SendSelectedTask}"
+                    Visibility="{Binding SendButtonVisibility, Converter={StaticResource BoolToVisibility}}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Image
+                            Width="60"
+                            Height="60"
+                            Margin="0,0,5,0"
+                            Source="/Resources/Icons/WhiteForkliftDownload.png" />
+                        <TextBlock
+                            Grid.Column="1"
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="Wyślij zadanie do wózka" />
+                    </Grid>
+                </Button>
+                <Button
+                    Grid.Column="1"
+                    Width="auto"
+                    Margin="0,10,0,0"
+                    Padding="0,10"
+                    VerticalAlignment="Bottom"
+                    HorizontalContentAlignment="Center"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Command="{Binding Path=SendSelectedTask}"
+                    Visibility="{Binding StartButtonVisibility, Converter={StaticResource BoolToVisibility}}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Image
+                            Width="60"
+                            Height="60"
+                            Margin="0,0,5,0"
+                            Source="/Resources/Icons/WhiteForkliftDownload.png" />
+                        <TextBlock
+                            Grid.Column="1"
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="Wyślij zadanie do wózka" />
+                    </Grid>
+                </Button>
+                <!--#endregion-->
+            </StackPanel>
+
+            <!--#endregion-->
+        </Grid>
+
+        <!--#endregion-->
+    </Grid>
+    <!--#endregion-->
+
+</Page>

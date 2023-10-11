@@ -1,0 +1,330 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="appsettings.json" />
+    <None Remove="FMSData.db" />
+    <None Remove="Resources\Fonts\Saira-Regular.ttf" />
+    <None Remove="Resources\Fonts\Saira-SemiBold.ttf" />
+    <None Remove="Resources\Fonts\SairaCondensed-Regular.ttf" />
+    <None Remove="Resources\Icons\closeAppIcon.png" />
+    <None Remove="Resources\Icons\loginAnimatedIcon.gif" />
+    <None Remove="Resources\Icons\WhiteAdd.png" />
+    <None Remove="Resources\Icons\WhiteAddPalletTruck.png" />
+    <None Remove="Resources\Icons\WhiteAddPalletTruck.xcf" />
+    <None Remove="Resources\Icons\WhiteAddUser.png" />
+    <None Remove="Resources\Icons\WhiteAddUser.xcf" />
+    <None Remove="Resources\Icons\WhiteArrow1.png" />
+    <None Remove="Resources\Icons\WhiteArrow2.png" />
+    <None Remove="Resources\Icons\WhiteAutomaticWork.png" />
+    <None Remove="Resources\Icons\WhiteAxisX.png" />
+    <None Remove="Resources\Icons\WhiteAxisY.png" />
+    <None Remove="Resources\Icons\WhiteBattery.png" />
+    <None Remove="Resources\Icons\WhiteCharging.png" />
+    <None Remove="Resources\Icons\WhiteCheckConnection.png" />
+    <None Remove="Resources\Icons\WhiteCloseApp.png" />
+    <None Remove="Resources\Icons\WhiteCommandList.png" />
+    <None Remove="Resources\Icons\WhiteCreateTaskPage.png" />
+    <None Remove="Resources\Icons\WhiteCustomTaskPage.png" />
+    <None Remove="Resources\Icons\WhiteDatatbaseLoad.png" />
+    <None Remove="Resources\Icons\WhiteDatatbaseSave.png" />
+    <None Remove="Resources\Icons\WhiteDelete.png" />
+    <None Remove="Resources\Icons\WhiteDiagnosticMode.png" />
+    <None Remove="Resources\Icons\WhiteEdit.png" />
+    <None Remove="Resources\Icons\WhiteEditTaskPage.png" />
+    <None Remove="Resources\Icons\WhiteForkliftCargoWeight.png" />
+    <None Remove="Resources\Icons\WhiteForkliftDownload.png" />
+    <None Remove="Resources\Icons\WhiteForkliftUpload.png" />
+    <None Remove="Resources\Icons\WhiteForkliftWork.png" />
+    <None Remove="Resources\Icons\WhiteForksHeight.png" />
+    <None Remove="Resources\Icons\WhiteGetLocation.png" />
+    <None Remove="Resources\Icons\WhiteHeight.png" />
+    <None Remove="Resources\Icons\WhiteInitializing.png" />
+    <None Remove="Resources\Icons\WhiteJobCreator.png" />
+    <None Remove="Resources\Icons\WhiteLiveMonitoring.png" />
+    <None Remove="Resources\Icons\WhiteLoad.png" />
+    <None Remove="Resources\Icons\WhiteLocationsPage.png" />
+    <None Remove="Resources\Icons\WhiteLoginMain.png" />
+    <None Remove="Resources\Icons\WhiteLowBattery.png" />
+    <None Remove="Resources\Icons\WhiteManualMode.png" />
+    <None Remove="Resources\Icons\WhiteManualTaskSending.png" />
+    <None Remove="Resources\Icons\WhiteMapLocalization.png" />
+    <None Remove="Resources\Icons\WhiteMenuArrowDown.png" />
+    <None Remove="Resources\Icons\WhiteNavRide.png" />
+    <None Remove="Resources\Icons\WhitePalletTruck.png" />
+    <None Remove="Resources\Icons\WhitePalletUnload.png" />
+    <None Remove="Resources\Icons\WhitePause.png" />
+    <None Remove="Resources\Icons\WhitePlay.png" />
+    <None Remove="Resources\Icons\WhitePWM.png" />
+    <None Remove="Resources\Icons\WhiteRefreshDate.png" />
+    <None Remove="Resources\Icons\WhiteRotation.png" />
+    <None Remove="Resources\Icons\WhiteSpeed.png" />
+    <None Remove="Resources\Icons\WhiteStandby.png" />
+    <None Remove="Resources\Icons\WhiteSteering.png" />
+    <None Remove="Resources\Icons\WhiteStop.png" />
+    <None Remove="Resources\Icons\WhiteTaskArchivePage.png" />
+    <None Remove="Resources\Icons\WhiteTaskList.png" />
+    <None Remove="Resources\Icons\WhiteTEBParameters.png" />
+    <None Remove="Resources\Icons\WhiteTilt.png" />
+    <None Remove="Resources\Icons\WhiteUserLogin.png" />
+    <None Remove="Resources\Icons\WhiteUserLogout.png" />
+    <None Remove="Resources\Icons\WhiteWaitingForChoice.png" />
+    <None Remove="Resources\Icons\WhiteWeight.png" />
+    <None Remove="Resources\Icons\WhiteWorkSafety.png" />
+    <None Remove="Resources\Icons\WhiteWorkState.png" />
+    <None Remove="Resources\Images\backgroundimg1.png" />
+    <None Remove="Resources\Images\Logo.png" />
+    <None Remove="Services\Communication\ForkliftConnectionService.cs~RF2e387a4.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Icons\WhiteArrow1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteArrow2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteAutomaticWork.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteAxisX.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteAxisY.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteBattery.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteCharging.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteCreateTaskPage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteCustomTaskPage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteDatatbaseLoad.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteDatatbaseSave.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteDiagnosticMode.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteEditTaskPage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteForkliftCargoWeight.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteForkliftDownload.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteForkliftUpload.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteForkliftWork.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteForksHeight.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteGetLocation.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteHeight.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteInitializing.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteJobCreator.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteLoad.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteLocationsPage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteLowBattery.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteManualMode.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteManualTaskSending.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteNavRide.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhitePalletUnload.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhitePause.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhitePlay.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhitePWM.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteRefreshDate.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteRotation.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteSpeed.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteStandby.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteSteering.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteStop.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteTaskArchivePage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteTEBParameters.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteTilt.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteUserLogin.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteUserLogout.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FMSData.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Fonts\Saira-Regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Fonts\Saira-SemiBold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Fonts\SairaCondensed-Regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteAdd.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteAddPalletTruck.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteAddUser.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteCheckConnection.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteCloseApp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteDelete.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteEdit.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteLoginMain.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteMenuArrowDown.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhitePalletTruck.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteWaitingForChoice.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteWeight.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteWorkSafety.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\backgroundimg1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CefSharp.Common.NETCore" Version="116.0.150" />
+    <PackageReference Include="CefSharp.Wpf.NETCore" Version="116.0.150" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
+    <PackageReference Include="ServiceStack.Interfaces" Version="6.10.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Icons\WhiteCommandList.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteLiveMonitoring.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteMapLocalization.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteTaskList.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\WhiteWorkState.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="chromiumembeddedframework.runtime.win-arm64" Version="116.0.15" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="chromiumembeddedframework.runtime.win-x64" Version="116.0.15" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="chromiumembeddedframework.runtime.win-x86" Version="116.0.15" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,466 @@
+﻿<Page
+    x:Class="FleetManagementSystem.Views.MainPages.ForkliftPages.LiveDataPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:conv="clr-namespace:FleetManagementSystem.ViewModels.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:FleetManagementSystem.Views.MainPages.ForkliftPages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="LiveDataPage"
+    d:DesignHeight="980"
+    d:DesignWidth="1570"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <conv:BoolToVIsibilityConverter x:Key="BoolToVisibilityConverter" />
+        <conv:NegativeBoolConverter x:Key="NegativeBoolConverter" />
+        <conv:BoolToRedGreenConverter x:Key="BoolToColor" />
+        <conv:BoolToGreyGreenConverter x:Key="BoolToGreyGreen" />
+        <conv:BoolToRedGreyConverter x:Key="BoolToRedGrey" />
+        <conv:BoolToYellowGreenConverter x:Key="BoolToYellowGreen" />
+    </Page.Resources>
+    <Grid>
+
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Width="80" Margin="0,15,0,0">
+                <Image
+                    Width=" 35"
+                    Height="35"
+                    Source="/Resources/Icons/WHiteRefreshDate.png" />
+                <Separator
+                    Height="10"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <Image
+                    Width=" 35"
+                    Height="35"
+                    Source="/Resources/Icons/WhiteBattery.png" />
+                <Separator
+                    Height="10"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <Image
+                    Width=" 35"
+                    Height="35"
+                    Source="/Resources/Icons/WhiteBattery.png" />
+                <Separator
+                    Height="15"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <Image
+                    Width=" 35"
+                    Height="35"
+                    Source="/Resources/Icons/WhiteLowBattery.png" />
+                <Separator
+                    Height="10"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <Image
+                    Width=" 35"
+                    Height="35"
+                    Source="/Resources/Icons/WhiteAxisX.png" />
+                <Separator
+                    Height="12"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <Image
+                    Width=" 35"
+                    Height="35"
+                    Source="/Resources/Icons/WhiteAxisY.png" />
+                <Separator
+                    Height="12"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <Image
+                    Width=" 35"
+                    Height="35"
+                    Source="/Resources/Icons/WhiteRotation.png" />
+                <Separator
+                    Height="12"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <Image
+                    Width=" 35"
+                    Height="35"
+                    Source="/Resources/Icons/WhitePWM.png" />
+                <Separator
+                    Height="12"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <Image
+                    Width=" 35"
+                    Height="35"
+                    Source="/Resources/Icons/WhiteSpeed.png" />
+                <Separator
+                    Height="12"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <Image
+                    Width=" 35"
+                    Height="35"
+                    Source="/Resources/Icons/WhiteSteering.png" />
+                <Separator
+                    Height="15"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <Image
+                    Width=" 35"
+                    Height="35"
+                    Source="/Resources/Icons/WhiteTilt.png" />
+                <Separator
+                    Height="13"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <Image
+                    Width=" 35"
+                    Height="35"
+                    Source="/Resources/Icons/WhiteTilt.png" />
+                <Separator
+                    Height="8"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <Image
+                    Width=" 40"
+                    Height="40"
+                    Source="/Resources/Icons/WhiteForkliftCargoWeight.png" />
+                <Separator
+                    Height="10"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <Image
+                    Width=" 35"
+                    Height="35"
+                    Source="/Resources/Icons/WhiteForksHeight.png" />
+                <Separator
+                    Height="10"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+            </StackPanel>
+            <StackPanel Width="auto" Margin="0,15,0,0">
+                <TextBlock
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Text="Czas odświeżenia danych:" />
+                <Separator
+                    Height="15"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <TextBlock
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Text="Napięcie baterii:" />
+                <Separator
+                    Height="15"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <TextBlock
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Text="Pozostało baterii:" />
+                <Separator
+                    Height="15"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <TextBlock
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Text="Wymagane ładowanie:" />
+                <Separator
+                    Height="15"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <TextBlock
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Text="Aktualna pozcja w osi X mapy:" />
+                <Separator
+                    Height="15"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <TextBlock
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Text="Aktualna pozycja w osi Y mapy:" />
+                <Separator
+                    Height="15"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <TextBlock
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Text="Aktualna pozycja w osi obrotu mapy:" />
+                <Separator
+                    Height="15"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <TextBlock
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Text="Zadane jedenestki mocy napędu:" />
+                <Separator
+                    Height="15"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <TextBlock
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Text="Aktualna prędkość:" />
+                <Separator
+                    Height="15"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <TextBlock
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Text="Aktualny kąt skrętu kierownicy:" />
+                <Separator
+                    Height="15"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <TextBlock
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Text="Pochylenie wózka w osi 1:" />
+                <Separator
+                    Height="15"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <TextBlock
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Text="Pochylenie wózka w osi 2:" />
+                <Separator
+                    Height="15"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <TextBlock
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Text="Aktualna waga ładunku:" />
+                <Separator
+                    Height="15"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <TextBlock
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Foreground="White"
+                    Text="Aktualna wysokość uniesienia wideł:" />
+                <Separator
+                    Height="15"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+            </StackPanel>
+            <StackPanel Width="300" Margin="35,16,0,0">
+                <TextBox
+                    Width="300"
+                    HorizontalAlignment="Left"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Focusable="False"
+                    FontSize="24"
+                    Foreground="White"
+                    IsHitTestVisible="False"
+                    Text="{Binding DataUpdateTime}" />
+                <Separator
+                    Height="13"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <TextBox
+                    Width="300"
+                    HorizontalAlignment="Left"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Focusable="False"
+                    FontSize="24"
+                    Foreground="White"
+                    IsHitTestVisible="False"
+                    Text="{Binding BatteryVoltage}" />
+                <Separator
+                    Height="13"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <TextBox
+                    Width="300"
+                    HorizontalAlignment="Left"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Focusable="False"
+                    FontSize="24"
+                    Foreground="White"
+                    IsHitTestVisible="False"
+                    Text="{Binding BatteryPercentage}" />
+                <Separator
+                    Height="13"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <TextBox
+                    Width="300"
+                    HorizontalAlignment="Left"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Focusable="False"
+                    FontSize="24"
+                    Foreground="White"
+                    IsHitTestVisible="False"
+                    Text="{Binding NeedCharging}" />
+                <Separator
+                    Height="13"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <TextBox
+                    Width="300"
+                    HorizontalAlignment="Left"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Focusable="False"
+                    FontSize="24"
+                    Foreground="White"
+                    IsHitTestVisible="False"
+                    Text="{Binding PositionX}" />
+                <Separator
+                    Height="13"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <TextBox
+                    Width="300"
+                    HorizontalAlignment="Left"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Focusable="False"
+                    FontSize="24"
+                    Foreground="White"
+                    IsHitTestVisible="False"
+                    Text="{Binding PositionY}" />
+                <Separator
+                    Height="13"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <TextBox
+                    Width="300"
+                    HorizontalAlignment="Left"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Focusable="False"
+                    FontSize="24"
+                    Foreground="White"
+                    IsHitTestVisible="False"
+                    Text="{Binding PositionR}" />
+                <Separator
+                    Height="13"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <TextBox
+                    Width="300"
+                    HorizontalAlignment="Left"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Focusable="False"
+                    FontSize="24"
+                    Foreground="White"
+                    IsHitTestVisible="False"
+                    Text="{Binding Pwm}" />
+                <Separator
+                    Height="13"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <TextBox
+                    Width="300"
+                    HorizontalAlignment="Left"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Focusable="False"
+                    FontSize="24"
+                    Foreground="White"
+                    IsHitTestVisible="False"
+                    Text="{Binding Speed}" />
+                <Separator
+                    Height="13"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <TextBox
+                    Width="300"
+                    HorizontalAlignment="Left"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Focusable="False"
+                    FontSize="24"
+                    Foreground="White"
+                    IsHitTestVisible="False"
+                    Text="{Binding SteeringAngle}" />
+                <Separator
+                    Height="13"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <TextBox
+                    Width="300"
+                    HorizontalAlignment="Left"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Focusable="False"
+                    FontSize="24"
+                    Foreground="White"
+                    IsHitTestVisible="False"
+                    Text="{Binding TiltAxis1}" />
+                <Separator
+                    Height="13"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <TextBox
+                    Width="300"
+                    HorizontalAlignment="Left"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Focusable="False"
+                    FontSize="24"
+                    Foreground="White"
+                    IsHitTestVisible="False"
+                    Text="{Binding TiltAxis2}" />
+                <Separator
+                    Height="13"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <TextBox
+                    Width="300"
+                    HorizontalAlignment="Left"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Focusable="False"
+                    FontSize="24"
+                    Foreground="White"
+                    IsHitTestVisible="False"
+                    Text="{Binding CargoWeight}" />
+                <Separator
+                    Height="13"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+                <TextBox
+                    Width="300"
+                    HorizontalAlignment="Left"
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    Focusable="False"
+                    FontSize="24"
+                    Foreground="White"
+                    IsHitTestVisible="False"
+                    Text="{Binding ForksHeight}" />
+                <Separator
+                    Height="15"
+                    Margin="0,-5,0,0"
+                    Background="{StaticResource UnactiveBackgroundBrush}" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>
